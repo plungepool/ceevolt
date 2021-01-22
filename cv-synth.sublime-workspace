@@ -1,0 +1,431 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"int",
+				"int"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"recor",
+				"recordactive"
+			],
+			[
+				"playback",
+				"playbackindex"
+			],
+			[
+				"beat",
+				"beat"
+			],
+			[
+				"fall",
+				"fallingEdge"
+			],
+			[
+				"reco",
+				"recordactive"
+			],
+			[
+				"record",
+				"recordtimer"
+			],
+			[
+				"upda",
+				"updatebuttons"
+			],
+			[
+				"playbac",
+				"playbackindex"
+			],
+			[
+				"check",
+				"checkactive"
+			],
+			[
+				"chec",
+				"checkactive"
+			],
+			[
+				"first",
+				"firstzero"
+			],
+			[
+				"ms",
+				"mstotal"
+			],
+			[
+				"Bd",
+				"BDpattern"
+			],
+			[
+				"JOYup",
+				"JOYup"
+			],
+			[
+				"JOYlef",
+				"JOYleft"
+			],
+			[
+				"JOYri",
+				"JOYright"
+			],
+			[
+				"JOYleft",
+				"JOYleftstate"
+			],
+			[
+				"JOYd",
+				"JOYdownstate"
+			],
+			[
+				"updat",
+				"updatebeatclock"
+			],
+			[
+				"BDbu",
+				"BDbuttstate"
+			],
+			[
+				"BD",
+				"BDpattern"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Core/Src/main.c",
+			"settings":
+			{
+				"buffer_size": 11531,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/rob/Dropbox/Programming/GitHub/CV-Synth/Core/Src"
+	],
+	"file_history":
+	[
+		"/home/rob/Dropbox/Programming/GitHub/CV-Synth/Src/main.c",
+		"/home/rob/Dropbox/Programming/GitHub/CV-Synth/Src/sysmem.c",
+		"/home/rob/Dropbox/Programming/GitHub/CV-Synth/Src/syscalls.c",
+		"/home/rob/Dropbox/Programming/GitHub/CV-Synth/Src/main.h",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/drum_machine.h",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/drum_machine.ino",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/AudioSampleSn.cpp",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/AudioSampleSn.h",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/AudioSampleBd.cpp",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/AudioSampleBd.h",
+		"/tmp/untitled1954970447.tmp/sketch_dec02a/sketch_dec02a.ino",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/SN.cpp",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/SN.h",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/BD.cpp",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/BD.h",
+		"/home/rob/Dropbox/Programming/GitHub/hello-world/Fake-generator.sh",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/record.c",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/playback.c",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/clocks_and_flags.c",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/buttonstates.c",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/clock.c",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine/functions.c",
+		"/home/rob/Dropbox/Programming/STM32/Embedded C/My_workspace/host/000TestProject/main.c",
+		"/home/rob/.config/sublime-text-3/Packages/User/BracketGuard.sublime-settings",
+		"/home/rob/.config/sublime-text-3/Packages/User/BracketFlasher.sublime-settings",
+		"/home/rob/.config/sublime-text-3/Packages/BracketGuard/BracketGuard.sublime-settings",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine.sublime-project",
+		"/home/rob/Dropbox/Programming/GitHub/Drum-Machine/drum_machine.sublime-workspace",
+		"/home/rob/Downloads/node-v12.18.4-linux-x64/README.md",
+		"/usr/share/doc/gnome-session/dbus/gnome-session.html",
+		"/home/rob/.local/share/applications/mozo-made.desktop",
+		"/home/rob/.config/mate/panel2.d/default/launchers/arduino-arduinoide.desktop"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"playMem",
+			"arr_drum[1].sample",
+			"arr_drum[0].sample",
+			"SD",
+			"const",
+			"playSD",
+			"SNon",
+			"BDon",
+			"}\n",
+			"BDpbi",
+			"active ",
+			"active",
+			"playbackindex",
+			"halfnotebpm",
+			";\n",
+			"livestate",
+			"measuretimer",
+			"timer"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Core/Src/main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "cv-synth.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
