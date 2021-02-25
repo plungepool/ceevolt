@@ -70,8 +70,8 @@ void MX_USB_HOST_Process(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-	uint8_t RxData[10];
-	uint8_t TxData[10]={0,1,2,3,4,5,6,7,8,9};
+	uint8_t RxData[11];
+	uint8_t TxData[13]="Hello World\r\n";
 /* USER CODE END 0 */
 
 /**
@@ -109,7 +109,7 @@ int main(void)
   MX_USB_HOST_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  	  	  //HAL_UART_Receive_DMA(&huart2, RxData, 11);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,11 +120,10 @@ int main(void)
     MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
-    //HAL_UART_Receive(&huart2, RxData, 10, 1000);
 
-    HAL_UART_Transmit(&huart2, TxData, 10, 10);
-    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
-    HAL_Delay(1000);
+    		HAL_UART_Transmit(&huart2, TxData, 13, 10);
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
+    HAL_Delay(5000);
   }
   /* USER CODE END 3 */
 }
@@ -302,7 +301,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 9600;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -428,7 +427,10 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+//	UNUSED(huart);
+//	HAL_UART_Transmit(&huart2, RxData, 11, 10);
+//}
 /* USER CODE END 4 */
 
 /**

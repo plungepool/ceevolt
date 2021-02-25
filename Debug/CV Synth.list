@@ -9,41 +9,41 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .rodata       00000024  08008fb8  08008fb8  00018fb8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08008fdc  08008fdc  0002009c  2**0
+  3 .ARM.extab    00000000  08008fdc  08008fdc  000200a0  2**0
                   CONTENTS
   4 .ARM          00000008  08008fdc  08008fdc  00018fdc  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08008fe4  08008fe4  0002009c  2**0
+  5 .preinit_array 00000000  08008fe4  08008fe4  000200a0  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   6 .init_array   00000004  08008fe4  08008fe4  00018fe4  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   7 .fini_array   00000004  08008fe8  08008fe8  00018fe8  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         0000009c  20000000  08008fec  00020000  2**2
+  8 .data         000000a0  20000000  08008fec  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000874  2000009c  08009088  0002009c  2**2
+  9 .bss          00000874  200000a0  0800908c  000200a0  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000910  08009088  00020910  2**0
+ 10 ._user_heap_stack 00000604  20000914  0800908c  00020914  2**0
                   ALLOC
- 11 .ARM.attributes 00000030  00000000  00000000  0002009c  2**0
+ 11 .ARM.attributes 00000030  00000000  00000000  000200a0  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0001b040  00000000  00000000  000200cc  2**0
+ 12 .debug_info   0001b04f  00000000  00000000  000200d0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00003a21  00000000  00000000  0003b10c  2**0
+ 13 .debug_abbrev 00003a21  00000000  00000000  0003b11f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00001398  00000000  00000000  0003eb30  2**3
+ 14 .debug_aranges 00001398  00000000  00000000  0003eb40  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00001218  00000000  00000000  0003fec8  2**3
+ 15 .debug_ranges 00001218  00000000  00000000  0003fed8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  0002406f  00000000  00000000  000410e0  2**0
+ 16 .debug_macro  0002406f  00000000  00000000  000410f0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   000128d7  00000000  00000000  0006514f  2**0
+ 17 .debug_line   000128d7  00000000  00000000  0006515f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000cd505  00000000  00000000  00077a26  2**0
+ 18 .debug_str    000cd505  00000000  00000000  00077a36  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  00144f2b  2**0
+ 19 .comment      0000007b  00000000  00000000  00144f3b  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00005314  00000000  00000000  00144fa8  2**2
+ 20 .debug_frame  00005314  00000000  00000000  00144fb8  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -60,7 +60,7 @@ Disassembly of section .text:
  800019a:	2301      	movs	r3, #1
  800019c:	7023      	strb	r3, [r4, #0]
  800019e:	bd10      	pop	{r4, pc}
- 80001a0:	2000009c 	.word	0x2000009c
+ 80001a0:	200000a0 	.word	0x200000a0
  80001a4:	00000000 	.word	0x00000000
  80001a8:	08008fa0 	.word	0x08008fa0
 
@@ -73,7 +73,7 @@ Disassembly of section .text:
  80001b6:	f3af 8000 	nop.w
  80001ba:	bd08      	pop	{r3, pc}
  80001bc:	00000000 	.word	0x00000000
- 80001c0:	200000a0 	.word	0x200000a0
+ 80001c0:	200000a4 	.word	0x200000a4
  80001c4:	08008fa0 	.word	0x08008fa0
 
 080001c8 <__aeabi_uldivmod>:
@@ -404,25 +404,24 @@ int main(void)
  80004f0:	f008 f978 	bl	80087e4 <MX_USB_HOST_Process>
 
     /* USER CODE BEGIN 3 */
-    //HAL_UART_Receive(&huart2, RxData, 10, 1000);
 
-    HAL_UART_Transmit(&huart2, TxData, 10, 10);
+    		HAL_UART_Transmit(&huart2, TxData, 13, 10);
  80004f4:	230a      	movs	r3, #10
- 80004f6:	220a      	movs	r2, #10
+ 80004f6:	220d      	movs	r2, #13
  80004f8:	4906      	ldr	r1, [pc, #24]	; (8000514 <main+0x4c>)
  80004fa:	4807      	ldr	r0, [pc, #28]	; (8000518 <main+0x50>)
  80004fc:	f004 fc67 	bl	8004dce <HAL_UART_Transmit>
-    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
- 8000500:	f44f 5100 	mov.w	r1, #8192	; 0x2000
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
+ 8000500:	f44f 4100 	mov.w	r1, #32768	; 0x8000
  8000504:	4805      	ldr	r0, [pc, #20]	; (800051c <main+0x54>)
  8000506:	f001 fb2c 	bl	8001b62 <HAL_GPIO_TogglePin>
-    HAL_Delay(1000);
- 800050a:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+    HAL_Delay(5000);
+ 800050a:	f241 3088 	movw	r0, #5000	; 0x1388
  800050e:	f000 fd37 	bl	8000f80 <HAL_Delay>
     MX_USB_HOST_Process();
  8000512:	e7ed      	b.n	80004f0 <main+0x28>
  8000514:	20000000 	.word	0x20000000
- 8000518:	200001e4 	.word	0x200001e4
+ 8000518:	200001e8 	.word	0x200001e8
  800051c:	40020c00 	.word	0x40020c00
 
 08000520 <SystemClock_Config>:
@@ -649,7 +648,7 @@ static void MX_I2C1_Init(void)
 }
  800066c:	bf00      	nop
  800066e:	bd80      	pop	{r7, pc}
- 8000670:	2000012c 	.word	0x2000012c
+ 8000670:	20000130 	.word	0x20000130
  8000674:	40005400 	.word	0x40005400
  8000678:	000186a0 	.word	0x000186a0
 
@@ -720,7 +719,7 @@ static void MX_I2S3_Init(void)
 }
  80006cc:	bf00      	nop
  80006ce:	bd80      	pop	{r7, pc}
- 80006d0:	20000224 	.word	0x20000224
+ 80006d0:	20000228 	.word	0x20000228
  80006d4:	40003c00 	.word	0x40003c00
 
 080006d8 <MX_SPI1_Init>:
@@ -802,7 +801,7 @@ static void MX_SPI1_Init(void)
 }
  8000738:	bf00      	nop
  800073a:	bd80      	pop	{r7, pc}
- 800073c:	20000180 	.word	0x20000180
+ 800073c:	20000184 	.word	0x20000184
  8000740:	40013000 	.word	0x40013000
 
 08000744 <MX_USART2_UART_Init>:
@@ -823,9 +822,9 @@ static void MX_USART2_UART_Init(void)
  8000748:	4b11      	ldr	r3, [pc, #68]	; (8000790 <MX_USART2_UART_Init+0x4c>)
  800074a:	4a12      	ldr	r2, [pc, #72]	; (8000794 <MX_USART2_UART_Init+0x50>)
  800074c:	601a      	str	r2, [r3, #0]
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 9600;
  800074e:	4b10      	ldr	r3, [pc, #64]	; (8000790 <MX_USART2_UART_Init+0x4c>)
- 8000750:	f44f 32e1 	mov.w	r2, #115200	; 0x1c200
+ 8000750:	f44f 5216 	mov.w	r2, #9600	; 0x2580
  8000754:	605a      	str	r2, [r3, #4]
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
  8000756:	4b0e      	ldr	r3, [pc, #56]	; (8000790 <MX_USART2_UART_Init+0x4c>)
@@ -869,7 +868,7 @@ static void MX_USART2_UART_Init(void)
  800078a:	bf00      	nop
  800078c:	bd80      	pop	{r7, pc}
  800078e:	bf00      	nop
- 8000790:	200001e4 	.word	0x200001e4
+ 8000790:	200001e8 	.word	0x200001e8
  8000794:	40004400 	.word	0x40004400
 
 08000798 <MX_DMA_Init>:
@@ -1786,7 +1785,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
  8000d0c:	40004400 	.word	0x40004400
  8000d10:	40023800 	.word	0x40023800
  8000d14:	40020000 	.word	0x40020000
- 8000d18:	200000cc 	.word	0x200000cc
+ 8000d18:	200000d0 	.word	0x200000d0
  8000d1c:	40026088 	.word	0x40026088
 
 08000d20 <NMI_Handler>:
@@ -1968,7 +1967,7 @@ void DMA1_Stream5_IRQHandler(void)
  8000d7e:	bf00      	nop
  8000d80:	bd80      	pop	{r7, pc}
  8000d82:	bf00      	nop
- 8000d84:	200000cc 	.word	0x200000cc
+ 8000d84:	200000d0 	.word	0x200000d0
 
 08000d88 <USART2_IRQHandler>:
 
@@ -1992,7 +1991,7 @@ void USART2_IRQHandler(void)
  8000d92:	bf00      	nop
  8000d94:	bd80      	pop	{r7, pc}
  8000d96:	bf00      	nop
- 8000d98:	200001e4 	.word	0x200001e4
+ 8000d98:	200001e8 	.word	0x200001e8
 
 08000d9c <OTG_FS_IRQHandler>:
 
@@ -2016,7 +2015,7 @@ void OTG_FS_IRQHandler(void)
  8000da6:	bf00      	nop
  8000da8:	bd80      	pop	{r7, pc}
  8000daa:	bf00      	nop
- 8000dac:	20000648 	.word	0x20000648
+ 8000dac:	2000064c 	.word	0x2000064c
 
 08000db0 <_sbrk>:
  *
@@ -2096,8 +2095,8 @@ void *_sbrk(ptrdiff_t incr)
  8000e0a:	bd80      	pop	{r7, pc}
  8000e0c:	20020000 	.word	0x20020000
  8000e10:	00000400 	.word	0x00000400
- 8000e14:	200000b8 	.word	0x200000b8
- 8000e18:	20000910 	.word	0x20000910
+ 8000e14:	200000bc 	.word	0x200000bc
+ 8000e18:	20000918 	.word	0x20000918
 
 08000e1c <SystemInit>:
   *         configuration.
@@ -2215,11 +2214,11 @@ LoopFillZerobss:
   ldr  r0, =_sdata
  8000e88:	20000000 	.word	0x20000000
   ldr  r3, =_edata
- 8000e8c:	2000009c 	.word	0x2000009c
+ 8000e8c:	200000a0 	.word	0x200000a0
   ldr  r2, =_sbss
- 8000e90:	2000009c 	.word	0x2000009c
+ 8000e90:	200000a0 	.word	0x200000a0
   ldr  r3, = _ebss
- 8000e94:	20000910 	.word	0x20000910
+ 8000e94:	20000914 	.word	0x20000914
 
 08000e98 <ADC_IRQHandler>:
  * @retval None       
@@ -2353,9 +2352,9 @@ __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
  8000f2e:	3708      	adds	r7, #8
  8000f30:	46bd      	mov	sp, r7
  8000f32:	bd80      	pop	{r7, pc}
- 8000f34:	2000000c 	.word	0x2000000c
- 8000f38:	20000014 	.word	0x20000014
- 8000f3c:	20000010 	.word	0x20000010
+ 8000f34:	20000010 	.word	0x20000010
+ 8000f38:	20000018 	.word	0x20000018
+ 8000f3c:	20000014 	.word	0x20000014
 
 08000f40 <HAL_IncTick>:
  * @note This function is declared as __weak to be overwritten in case of other 
@@ -2381,8 +2380,8 @@ __weak void HAL_IncTick(void)
  8000f58:	f85d 7b04 	ldr.w	r7, [sp], #4
  8000f5c:	4770      	bx	lr
  8000f5e:	bf00      	nop
- 8000f60:	20000014 	.word	0x20000014
- 8000f64:	2000026c 	.word	0x2000026c
+ 8000f60:	20000018 	.word	0x20000018
+ 8000f64:	20000270 	.word	0x20000270
 
 08000f68 <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other 
@@ -2402,7 +2401,7 @@ __weak uint32_t HAL_GetTick(void)
  8000f74:	f85d 7b04 	ldr.w	r7, [sp], #4
  8000f78:	4770      	bx	lr
  8000f7a:	bf00      	nop
- 8000f7c:	2000026c 	.word	0x2000026c
+ 8000f7c:	20000270 	.word	0x20000270
 
 08000f80 <HAL_Delay>:
   *       implementations in user file.
@@ -2453,7 +2452,7 @@ __weak void HAL_Delay(uint32_t Delay)
  8000fba:	3710      	adds	r7, #16
  8000fbc:	46bd      	mov	sp, r7
  8000fbe:	bd80      	pop	{r7, pc}
- 8000fc0:	20000014 	.word	0x20000014
+ 8000fc0:	20000018 	.word	0x20000018
 
 08000fc4 <__NVIC_SetPriorityGrouping>:
            In case of a conflict between priority grouping and available
@@ -3620,7 +3619,7 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
  80015da:	6878      	ldr	r0, [r7, #4]
  80015dc:	4798      	blx	r3
  80015de:	e022      	b.n	8001626 <HAL_DMA_IRQHandler+0x29e>
- 80015e0:	2000000c 	.word	0x2000000c
+ 80015e0:	20000010 	.word	0x20000010
  80015e4:	1b4e81b5 	.word	0x1b4e81b5
         }
       }
@@ -11627,8 +11626,8 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  80047c4:	40023c00 	.word	0x40023c00
  80047c8:	40023800 	.word	0x40023800
  80047cc:	08008fbc 	.word	0x08008fbc
- 80047d0:	2000000c 	.word	0x2000000c
- 80047d4:	20000010 	.word	0x20000010
+ 80047d0:	20000010 	.word	0x20000010
+ 80047d4:	20000014 	.word	0x20000014
 
 080047d8 <HAL_RCC_GetSysClockFreq>:
   *
@@ -11863,7 +11862,7 @@ uint32_t HAL_RCC_GetHCLKFreq(void)
  8004994:	f85d 7b04 	ldr.w	r7, [sp], #4
  8004998:	4770      	bx	lr
  800499a:	bf00      	nop
- 800499c:	2000000c 	.word	0x2000000c
+ 800499c:	20000010 	.word	0x20000010
 
 080049a0 <HAL_RCC_GetPCLK1Freq>:
   * @note   Each time PCLK1 changes, this function must be called to update the
@@ -16411,7 +16410,7 @@ HAL_StatusTypeDef USB_HC_StartXfer(USB_OTG_GlobalTypeDef *USBx, USB_OTG_HCTypeDe
  80065f8:	bd80      	pop	{r7, pc}
  80065fa:	bf00      	nop
  80065fc:	1ff80000 	.word	0x1ff80000
- 8006600:	200000bc 	.word	0x200000bc
+ 8006600:	200000c0 	.word	0x200000c0
 
 08006604 <USB_HC_ReadInterrupt>:
   * @brief Read all host channel interrupts status
@@ -22441,8 +22440,8 @@ void MX_USB_HOST_Init(void)
  80087d4:	bd80      	pop	{r7, pc}
  80087d6:	bf00      	nop
  80087d8:	080087f9 	.word	0x080087f9
- 80087dc:	20000270 	.word	0x20000270
- 80087e0:	20000018 	.word	0x20000018
+ 80087dc:	20000274 	.word	0x20000274
+ 80087e0:	2000001c 	.word	0x2000001c
 
 080087e4 <MX_USB_HOST_Process>:
 
@@ -22461,7 +22460,7 @@ void MX_USB_HOST_Process(void)
  80087ee:	bf00      	nop
  80087f0:	bd80      	pop	{r7, pc}
  80087f2:	bf00      	nop
- 80087f4:	20000270 	.word	0x20000270
+ 80087f4:	20000274 	.word	0x20000274
 
 080087f8 <USBH_UserProcess>:
 /*
@@ -22529,7 +22528,7 @@ static void USBH_UserProcess  (USBH_HandleTypeDef *phost, uint8_t id)
  8008848:	f85d 7b04 	ldr.w	r7, [sp], #4
  800884c:	4770      	bx	lr
  800884e:	bf00      	nop
- 8008850:	200000c0 	.word	0x200000c0
+ 8008850:	200000c4 	.word	0x200000c4
 
 08008854 <HAL_HCD_MspInit>:
                        LL Driver Callbacks (HCD -> USB Host Library)
@@ -22870,7 +22869,7 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
  8008a2e:	46bd      	mov	sp, r7
  8008a30:	bd80      	pop	{r7, pc}
  8008a32:	bf00      	nop
- 8008a34:	20000648 	.word	0x20000648
+ 8008a34:	2000064c 	.word	0x2000064c
 
 08008a38 <USBH_LL_Start>:
   * @brief  Start the low level portion of the host driver.
@@ -23532,7 +23531,7 @@ void MX_DriverVbusFS(uint8_t state)
  8008daa:	6818      	ldr	r0, [r3, #0]
  8008dac:	4770      	bx	lr
  8008dae:	bf00      	nop
- 8008db0:	20000038 	.word	0x20000038
+ 8008db0:	2000003c 	.word	0x2000003c
 
 08008db4 <__libc_init_array>:
  8008db4:	b570      	push	{r4, r5, r6, lr}
@@ -23571,7 +23570,7 @@ void MX_DriverVbusFS(uint8_t state)
  8008e00:	6818      	ldr	r0, [r3, #0]
  8008e02:	f000 b861 	b.w	8008ec8 <_malloc_r>
  8008e06:	bf00      	nop
- 8008e08:	20000038 	.word	0x20000038
+ 8008e08:	2000003c 	.word	0x2000003c
 
 08008e0c <free>:
  8008e0c:	4b02      	ldr	r3, [pc, #8]	; (8008e18 <free+0xc>)
@@ -23579,7 +23578,7 @@ void MX_DriverVbusFS(uint8_t state)
  8008e10:	6818      	ldr	r0, [r3, #0]
  8008e12:	f000 b80b 	b.w	8008e2c <_free_r>
  8008e16:	bf00      	nop
- 8008e18:	20000038 	.word	0x20000038
+ 8008e18:	2000003c 	.word	0x2000003c
 
 08008e1c <memset>:
  8008e1c:	4402      	add	r2, r0
@@ -23663,7 +23662,7 @@ void MX_DriverVbusFS(uint8_t state)
  8008ebe:	e7c7      	b.n	8008e50 <_free_r+0x24>
  8008ec0:	bd38      	pop	{r3, r4, r5, pc}
  8008ec2:	bf00      	nop
- 8008ec4:	200000c4 	.word	0x200000c4
+ 8008ec4:	200000c8 	.word	0x200000c8
 
 08008ec8 <_malloc_r>:
  8008ec8:	b570      	push	{r4, r5, r6, lr}
@@ -23742,8 +23741,8 @@ void MX_DriverVbusFS(uint8_t state)
  8008f6e:	d0cf      	beq.n	8008f10 <_malloc_r+0x48>
  8008f70:	6025      	str	r5, [r4, #0]
  8008f72:	e7db      	b.n	8008f2c <_malloc_r+0x64>
- 8008f74:	200000c4 	.word	0x200000c4
- 8008f78:	200000c8 	.word	0x200000c8
+ 8008f74:	200000c8 	.word	0x200000c8
+ 8008f78:	200000cc 	.word	0x200000cc
 
 08008f7c <_sbrk_r>:
  8008f7c:	b538      	push	{r3, r4, r5, lr}
@@ -23759,7 +23758,7 @@ void MX_DriverVbusFS(uint8_t state)
  8008f92:	b103      	cbz	r3, 8008f96 <_sbrk_r+0x1a>
  8008f94:	602b      	str	r3, [r5, #0]
  8008f96:	bd38      	pop	{r3, r4, r5, pc}
- 8008f98:	2000090c 	.word	0x2000090c
+ 8008f98:	20000910 	.word	0x20000910
 
 08008f9c <__malloc_lock>:
  8008f9c:	4770      	bx	lr
