@@ -23,7 +23,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -70,8 +71,8 @@ void MX_USB_HOST_Process(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-	uint8_t RxData[11];
-	uint8_t TxData[13]="Hello World\r\n";
+	uint8_t volatile RxData[11];
+	uint8_t volatile TxData[13]="Hello World\r\n";
 /* USER CODE END 0 */
 
 /**
@@ -109,7 +110,7 @@ int main(void)
   MX_USB_HOST_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  	  	  //HAL_UART_Receive_DMA(&huart2, RxData, 11);
+  	  	  HAL_UART_Receive_DMA(&huart2, RxData, 11);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -122,8 +123,10 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
     		HAL_UART_Transmit(&huart2, TxData, 13, 10);
+    		printf(RxData);
+    		printf("Hello World\n");
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
-    HAL_Delay(5000);
+    HAL_Delay(2000);
   }
   /* USER CODE END 3 */
 }
@@ -427,10 +430,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-//	UNUSED(huart);
-//	HAL_UART_Transmit(&huart2, RxData, 11, 10);
-//}
+//		void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+//			UNUSED(huart);
+//			HAL_UART_Transmit(&huart2, RxData, 11, 10);
+//			printf(RxData);
+//		}
 /* USER CODE END 4 */
 
 /**
