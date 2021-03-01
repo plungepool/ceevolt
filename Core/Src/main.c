@@ -16,6 +16,14 @@
   *
   ******************************************************************************
   */
+
+/*BUGS
+	- If messages that are too large are received, the remainder of previous message
+		will overflow onto the beginning of next message sent. Assuming opposite
+		problem likely when messages smaller than expected are received.
+	-
+*/
+
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -71,7 +79,7 @@ void MX_USB_HOST_Process(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-	uint8_t volatile RxData[11];
+	uint8_t volatile RxData[3];
 	uint8_t volatile TxData[13]="Hello World\r\n";
 /* USER CODE END 0 */
 
@@ -110,7 +118,7 @@ int main(void)
   MX_USB_HOST_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  	  	  HAL_UART_Receive_DMA(&huart2, RxData, 11);
+  	  	  HAL_UART_Receive_DMA(&huart2, RxData, 3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -121,10 +129,10 @@ int main(void)
     MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
+    		//HAL_UART_Transmit(&huart2, TxData, 13, 10);
+    		printf("\n");
 
-    		HAL_UART_Transmit(&huart2, TxData, 13, 10);
-    		printf(RxData);
-    		printf("Hello World\n");
+    printf("Status is 0x%X, pitch is 0x%X, velocity is 0x%X \n", RxData[0], RxData[1], RxData[2]);
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
     HAL_Delay(2000);
   }
