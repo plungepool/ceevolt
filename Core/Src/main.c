@@ -138,19 +138,22 @@ int main(void)
     MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
-    		//HAL_UART_Transmit(&huart2, TxData, 13, 10);
-    		printf("\n");
+    //HAL_UART_Transmit(&huart2, TxData, 13, 10);
+    //printf("\n");
 
-    printf("Status is 0x%X, pitch is 0x%X, velocity is 0x%X \n", RxData[0], RxData[1], RxData[2]);
+    if (RxData[1] > 78) { //Rounding off to 120 so 1v/oct scales properly
+        RxData[1] = 78;
+    }
 
-    //feed RxData[1] to function that converts note 0-127 to voltage between 0 and 3
-    valVolt = (RxData[1] * 3) / 127;
+    //feed RxData[1] to function that converts note 0-120 to voltage between 0 and 3
+    valVolt = (RxData[1] * 3) / 120;
 
     valByte = (uint8_t)((valVolt/3.0)*255);
     HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, valByte);
 
-    HAL_Delay(500);
+    printf("Status is 0x%X, pitch is 0x%X, velocity is 0x%X \n\n", RxData[0], RxData[1], RxData[2]);
 
+    HAL_Delay(500);
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
   }
   /* USER CODE END 3 */
