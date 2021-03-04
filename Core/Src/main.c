@@ -143,14 +143,15 @@ int main(void)
 
     printf("Status is 0x%X, pitch is 0x%X, velocity is 0x%X \n", RxData[0], RxData[1], RxData[2]);
 
-//    HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, value_dac);
-//    if (value_dac >= 4095) {
-//    	value_dac = 0;
-//    }
-    HAL_Delay(2000);
+    //feed RxData[1] to function that converts note 0-127 to voltage between 0 and 3
+    valVolt = (RxData[1] * 3) / 127;
+
+    valByte = (uint8_t)((valVolt/3.0)*255);
+    HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, valByte);
+
+    HAL_Delay(500);
 
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
-    HAL_Delay(2000);
   }
   /* USER CODE END 3 */
 }
