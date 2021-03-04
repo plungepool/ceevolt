@@ -1160,15 +1160,15 @@ int main(void)
     //HAL_UART_Transmit(&huart2, TxData, 13, 10);
     //printf("\n");
 
-    if (RxData[1] > 78) { //Rounding off to 120 so 1v/oct scales properly
+    if (RxData[1] > 120) { //Rounding off to 120 so 1v/oct scales properly
  8000dd6:	4b31      	ldr	r3, [pc, #196]	; (8000e9c <main+0x14c>)
  8000dd8:	785b      	ldrb	r3, [r3, #1]
  8000dda:	b2db      	uxtb	r3, r3
- 8000ddc:	2b4e      	cmp	r3, #78	; 0x4e
+ 8000ddc:	2b78      	cmp	r3, #120	; 0x78
  8000dde:	d902      	bls.n	8000de6 <main+0x96>
-        RxData[1] = 78;
+        RxData[1] = 120;
  8000de0:	4b2e      	ldr	r3, [pc, #184]	; (8000e9c <main+0x14c>)
- 8000de2:	224e      	movs	r2, #78	; 0x4e
+ 8000de2:	2278      	movs	r2, #120	; 0x78
  8000de4:	705a      	strb	r2, [r3, #1]
     }
 

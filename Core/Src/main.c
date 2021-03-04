@@ -141,8 +141,8 @@ int main(void)
     //HAL_UART_Transmit(&huart2, TxData, 13, 10);
     //printf("\n");
 
-    if (RxData[1] > 78) { //Rounding off to 120 so 1v/oct scales properly
-        RxData[1] = 78;
+    if (RxData[1] > 120) { //Rounding off to 120 so 1v/oct scales properly
+        RxData[1] = 120;
     }
 
     //feed RxData[1] to function that converts note 0-120 to voltage between 0 and 3
