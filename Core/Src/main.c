@@ -21,6 +21,7 @@
 	- If messages that are too large are received, the remainder of previous message
 		will overflow onto the beginning of next message sent. Assuming opposite
 		problem likely when messages smaller than expected are received.
+	- Get 12 bit DAC resolution working instead of 8 bit
 	-
 */
 
@@ -146,9 +147,9 @@ int main(void)
     }
 
     //feed RxData[1] to function that converts note 0-120 to voltage between 0 and 3
-    valVolt = (RxData[1] * 3) / 120;
+    valVolt = (RxData[1] * 3.3) / 120;
 
-    valByte = (uint8_t)((valVolt/3.0)*255);
+    valByte = (uint8_t)((valVolt/3.3)*255);
     HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, valByte);
 
     printf("Status is 0x%X, pitch is 0x%X, velocity is 0x%X \n\n", RxData[0], RxData[1], RxData[2]);
