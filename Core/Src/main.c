@@ -55,8 +55,6 @@ DAC_HandleTypeDef hdac;
 
 I2C_HandleTypeDef hi2c1;
 
-SPI_HandleTypeDef hspi1;
-
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart2_rx;
 
@@ -69,7 +67,6 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_I2C1_Init(void);
-static void MX_SPI1_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_DAC_Init(void);
 void MX_USB_HOST_Process(void);
@@ -83,8 +80,16 @@ void MX_USB_HOST_Process(void);
 	uint8_t volatile RxData[3];
 	uint8_t volatile TxData[13]="Hello World\r\n";
 
-	//uint32_t volatile value_dac=0x100;
+	//MIDI BYTES
+	uint8_t const midi_status = 0;
+	uint8_t const midi_pitch = 1;
+	uint8_t const midi_velocity = 2;
 
+	//GATE
+	uint8_t const note_on = 0x90;
+	uint8_t const note_off = 0x80;
+
+	//CV
 	float valVolt = 3; //range is 0v - 3v
 	uint8_t valByte;
 /* USER CODE END 0 */
@@ -119,16 +124,17 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_I2C1_Init();
-  MX_SPI1_Init();
   MX_USB_HOST_Init();
   MX_USART2_UART_Init();
   MX_DAC_Init();
   /* USER CODE BEGIN 2 */
-  	  	  valByte = (uint8_t)((valVolt/3.0)*255);
+  valByte = (uint8_t)((valVolt/3.0)*255);
 
-  	  	  HAL_UART_Receive_DMA(&huart2, RxData, 3);
-  	  	  HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
-  	  	  HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, valByte);
+  HAL_UART_Receive_DMA(&huart2, RxData, 3);
+  HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
+  HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, valByte);
+  HAL_DAC_Start(&hdac, DAC_CHANNEL_2);
+  HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -139,20 +145,23 @@ int main(void)
     MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
-    //HAL_UART_Transmit(&huart2, TxData, 13, 10);
-    //printf("\n");
-
-    if (RxData[1] > 120) { //Rounding off to 120 so 1v/oct scales properly
-        RxData[1] = 120;
+    //DAC1 Pitch
+    if (RxData[midi_pitch] > 120) { //Rounding off to 120 so 1v/oct scales properly
+        RxData[midi_pitch] = 120;
     }
-
-    //feed RxData[1] to function that converts note 0-120 to voltage between 0 and 3
-    valVolt = (RxData[1] * 3.3) / 120;
-
+    valVolt = (RxData[midi_pitch] * 3.3) / 120;
     valByte = (uint8_t)((valVolt/3.3)*255);
     HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, valByte);
 
-    printf("Status is 0x%X, pitch is 0x%X, velocity is 0x%X \n\n", RxData[0], RxData[1], RxData[2]);
+    //DAC2 Gate
+    if (RxData[midi_status] == 0x90) {
+    	HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 255);
+    }
+    if (RxData[midi_status] == 0x80) {
+    	HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 0);
+    }
+
+    printf("Status is 0x%X, pitch is 0x%X, velocity is 0x%X \n\n", RxData[midi_status], RxData[midi_pitch], RxData[midi_velocity]);
 
     HAL_Delay(500);
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
@@ -235,6 +244,12 @@ static void MX_DAC_Init(void)
   {
     Error_Handler();
   }
+  /** DAC channel OUT2 config
+  */
+  if (HAL_DAC_ConfigChannel(&hdac, &sConfig, DAC_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN DAC_Init 2 */
 
   /* USER CODE END DAC_Init 2 */
@@ -272,44 +287,6 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
-
-}
-
-/**
-  * @brief SPI1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_SPI1_Init(void)
-{
-
-  /* USER CODE BEGIN SPI1_Init 0 */
-
-  /* USER CODE END SPI1_Init 0 */
-
-  /* USER CODE BEGIN SPI1_Init 1 */
-
-  /* USER CODE END SPI1_Init 1 */
-  /* SPI1 parameter configuration*/
-  hspi1.Instance = SPI1;
-  hspi1.Init.Mode = SPI_MODE_MASTER;
-  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
-  hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  hspi1.Init.CRCPolynomial = 10;
-  if (HAL_SPI_Init(&hspi1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN SPI1_Init 2 */
-
-  /* USER CODE END SPI1_Init 2 */
 
 }
 
@@ -416,6 +393,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_EVT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SPI1_MISO_Pin SPI1_MOSI_Pin */
+  GPIO_InitStruct.Pin = SPI1_MISO_Pin|SPI1_MOSI_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : BOOT1_Pin */
   GPIO_InitStruct.Pin = BOOT1_Pin;
