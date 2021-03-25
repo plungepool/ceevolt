@@ -132,9 +132,9 @@ int main(void)
 
   HAL_UART_Receive_DMA(&huart2, RxData, 3);
   HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
-  HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, valByte);
+  HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, 255);
   HAL_DAC_Start(&hdac, DAC_CHANNEL_2);
-  HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 0);
+  HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 255);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -149,8 +149,8 @@ int main(void)
     if (RxData[midi_pitch] > 120) { //Rounding off to 120 so 1v/oct scales properly
         RxData[midi_pitch] = 120;
     }
-    valVolt = (RxData[midi_pitch] * 3.3) / 120;
-    valByte = (uint8_t)((valVolt/3.3)*255);
+    valVolt = (RxData[midi_pitch] * 3.3) / 120; 	//Actual output from DAC is 2.85v not 3.3v but compensated with opamp
+    valByte = (uint8_t)((valVolt/3.3)*255);			//Opamp R1 7.5K, R2 3K
     HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, valByte);
 
     //DAC2 Gate
@@ -161,10 +161,12 @@ int main(void)
     	HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 0);
     }
 
-    printf("Status is 0x%X, pitch is 0x%X, velocity is 0x%X \n\n", RxData[midi_status], RxData[midi_pitch], RxData[midi_velocity]);
+//    printf("Status is 0x%X, pitch is 0x%X, velocity is 0x%X \n\n", RxData[midi_status], RxData[midi_pitch], RxData[midi_velocity]);
+//
+//    HAL_UART_Transmit(&huart2, TxData, 13, 10);
 
-    HAL_Delay(500);
-    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
+//    HAL_Delay(500);
+//    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
   }
   /* USER CODE END 3 */
 }

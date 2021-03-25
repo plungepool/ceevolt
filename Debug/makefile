@@ -1,5 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
 ################################################################################
 
 -include ../makefile.init
@@ -32,49 +33,55 @@ endif
 
 -include ../makefile.defs
 
-BUILD_ARTIFACT_NAME := CV Synth
+OPTIONAL_TOOL_DEPS := \
+$(wildcard ../makefile.defs) \
+$(wildcard ../makefile.init) \
+$(wildcard ../makefile.targets) \
+
+
+BUILD_ARTIFACT_NAME := CV-Synth
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-CV\ Synth.elf \
+CV-Synth.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-CV\ Synth.list \
+CV-Synth.list \
 
 OBJCOPY_BIN += \
-CV\ Synth.bin \
+CV-Synth.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: CV\ Synth.elf secondary-outputs
+main-build: CV-Synth.elf secondary-outputs
 
 # Tool invocations
-CV\ Synth.elf: $(OBJS) $(USER_OBJS) /home/rob/Dropbox/Programming/GitHub/CV-Synth/STM32F407VGTX_FLASH.ld
-	arm-none-eabi-gcc -o "CV Synth.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/rob/Dropbox/Programming/GitHub/CV-Synth/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CV Synth.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+CV-Synth.elf: $(OBJS) $(USER_OBJS) /Users/bench-pc/Dropbox/Programming/STM32/STM32\ Cube\ IDE\ Workspace/CV-Synth/STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "CV-Synth.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/bench-pc/Dropbox/Programming/STM32/STM32 Cube IDE Workspace/CV-Synth/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CV-Synth.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-default.size.stdout: $(EXECUTABLES)
+default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-size  $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-CV\ Synth.list: $(EXECUTABLES)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "CV Synth.list"
+CV-Synth.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "CV-Synth.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-CV\ Synth.bin: $(EXECUTABLES)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "CV Synth.bin"
+CV-Synth.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "CV-Synth.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
