@@ -85,9 +85,9 @@ void MX_USB_HOST_Process(void);
 	uint8_t const midi_pitch = 1;
 	uint8_t const midi_velocity = 2;
 
-	//GATE
-	uint8_t const note_on = 0x90;
-	uint8_t const note_off = 0x80;
+//	//GATE
+//	uint8_t const note_on = 0x90;
+//	uint8_t const note_off = 0x80;
 
 	//CV
 	float valVolt = 3; //range is 0v - 3v
@@ -154,10 +154,10 @@ int main(void)
     HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, valByte);
 
     //DAC2 Gate
-    if (RxData[midi_status] == 0x90) {
+    if ((RxData[midi_status] >= 0x90) && (RxData[midi_status] <= 0x9F)) {
     	HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 255);
     }
-    if (RxData[midi_status] == 0x80) {
+    if ((RxData[midi_status] >= 0x80) && (RxData[midi_status] <= 0x8F)) {
     	HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 0);
     }
 
