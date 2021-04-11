@@ -17,12 +17,21 @@
   ******************************************************************************
   */
 
-/*BUGS
-	- If messages that are too large are received, the remainder of previous message
+/*
+ * TODO
+ * 		Get 12 bit DAC resolution working instead of 8 bit
+ *		Stabilize/buffer voltage before or after opamp
+ *		Custom BLE service - midi spec, handling, hw flow control
+ *		Custom PCB
+ *
+ * BUGS
+ * 		If messages that are too large are received, the remainder of previous message
 		will overflow onto the beginning of next message sent. Assuming opposite
-		problem likely when messages smaller than expected are received.
-	- Get 12 bit DAC resolution working instead of 8 bit
-	-
+		problem likely when messages smaller than expected are received. Would prob
+		be best to address when adding custom BLE service and midi handler
+ * 		Eurorack tuning isn't standardized, so what to do? Middle C is 5v for me
+		but 2v or 3v for different modules. 0v is middle c for moog so maybe
+		should shift range from 0v to 10v to -5v to +5v
 */
 
 /* USER CODE END Header */
